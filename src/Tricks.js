@@ -34,8 +34,16 @@ let converter = (tag) =>{
     return getNode(tag)
 }
 
+
+let splitNodes = (el, array) =>{
+    if(Array.isArray(array) && !array.filter(node=>node.nodeType).includes(false)){
+        array.map(node => el.appendChild(node))
+    }
+    return el
+}
+
 export let creator = function (tag, inner, params) {
-    let el = innerText(appendChild(converter(tag), inner), inner)
+    let el = innerText(splitNodes(appendChild(converter(tag), inner), inner), inner)
     setAttribute(el, params)
     return el;
 };
